@@ -1,0 +1,41 @@
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<form action="/recipes">
+<h1 class=" ms-3 mt-3">Welcome {{session['first_name']}}!</h1>
+<div class="container">
+    <div class="row">
+<div class="col-sm ms-3">
+<p>All posted recipes:</p>
+</div>
+<div class="col-2">
+<a class="me-3" href="/recipes/new">Create</a>
+<a href="/logout">Logout</a>
+</div>
+<div>
+    <table class="text text-center table-bordered col-12">
+        <thead class="">
+            <tr></tr>
+            <th>Name</th>
+            <th>Under 30 mins</th>
+            <th>Posted By</th>
+            <th>Actions</th>
+            </tr>
+        </thead>
+        {% for recipe in recipes %}
+        <tr>
+            <td>{{recipe.name}}</td>
+            <td>{{recipe.cook_time}}</td>
+            <td>{{recipe.first_name}} {{recipe.last_name}}</td>
+            <td>
+                <a href="/recipes/{{recipe.recipe_id}}">View</a> | 
+                <a href="/recipes/edit/{{recipe.recipe_id}}">Edit</a> | 
+                <a href="/recipes/delete/{{recipe.recipe_id}}">Delete</a>
+            </td>
+            {% endfor %}
+        </tr>
+    </table>
+    <input type="text" name="{{user_id}}" id="">{{session['user_id']}}
+</div>
+</form>
+
